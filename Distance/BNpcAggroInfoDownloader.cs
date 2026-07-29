@@ -80,14 +80,14 @@ internal static class BNpcAggroInfoDownloader
 	{
 		return status switch
 		{
-			DownloadStatus.None				=> Loc.Localize( "Download Status Message: None", "Ready" ),
-			DownloadStatus.Downloading		=> Loc.Localize( "Download Status Message: Downloading", "Downloading..." ),
-			DownloadStatus.FailedDownload	=> Loc.Localize( "Download Status Message: Failed Download", "Download failed!" ),
-			DownloadStatus.FailedFileLoad	=> Loc.Localize( "Download Status Message: Failed File Load", "The downloaded file was invalid!" ),
-			DownloadStatus.FailedFileWrite	=> Loc.Localize( "Download Status Message: Failed File Write", "The downloaded file could not be saved to disk; any updates will be lost upon reloading." ),
-			DownloadStatus.OutOfDateFile	=> Loc.Localize( "Download Status Message: Out of Date File", "The downloaded file was not newer than the current data, and has been discarded." ),
-			DownloadStatus.Completed		=> Loc.Localize( "Download Status Message: Completed", "Update Completed" ),
-			DownloadStatus.Canceled			=> Loc.Localize( "Download Status Message: Canceled", "The update operation was canceled!" ),
+			DownloadStatus.None				=> Loc.Localize( "Download Status Message: None", "準備完成" ),
+			DownloadStatus.Downloading		=> Loc.Localize( "Download Status Message: Downloading", "正在下載……" ),
+			DownloadStatus.FailedDownload	=> Loc.Localize( "Download Status Message: Failed Download", "下載失敗！" ),
+			DownloadStatus.FailedFileLoad	=> Loc.Localize( "Download Status Message: Failed File Load", "下載的檔案無效！" ),
+			DownloadStatus.FailedFileWrite	=> Loc.Localize( "Download Status Message: Failed File Write", "無法將下載檔案儲存至磁碟；重新載入後將遺失更新。" ),
+			DownloadStatus.OutOfDateFile	=> Loc.Localize( "Download Status Message: Out of Date File", "下載檔案並未比目前資料新，已捨棄。" ),
+			DownloadStatus.Completed		=> Loc.Localize( "Download Status Message: Completed", "更新完成" ),
+			DownloadStatus.Canceled			=> Loc.Localize( "Download Status Message: Canceled", "更新作業已取消！" ),
 			_ => "You shouldn't ever see this!",
 		};
 	}
