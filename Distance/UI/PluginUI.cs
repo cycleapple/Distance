@@ -81,22 +81,22 @@ public sealed class PluginUI : IDisposable
 		}
 
 		ImGui.SetNextWindowSizeConstraints( new Vector2( 800f, 500f ) * ImGui.GetIO().FontGlobalScale, new( float.MaxValue ) );
-		if( ImGui.Begin( Loc.Localize( "Window Title: Config", "Distance Settings" ) + "###Distance Settings", ref mSettingsWindowVisible,
+		if( ImGui.Begin( Loc.Localize( "Window Title: Config", "Distance 設定" ) + "###Distance Settings", ref mSettingsWindowVisible,
 			ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse ) )
 		{
 			if( ImGui.BeginTabBar( "###DistanceSettingsTabBar" ) )
 			{
-				if( ImGui.BeginTabItem( Loc.Localize( "Settings Tab: General", "General Settings" ) + "###GeneralSettingsTab" ) )
+				if( ImGui.BeginTabItem( Loc.Localize( "Settings Tab: General", "一般設定" ) + "###GeneralSettingsTab" ) )
 				{
 					GeneralSettingsUI.DrawSettingsTab();
 					ImGui.EndTabItem();
 				}
-				if( ImGui.BeginTabItem( Loc.Localize( "Settings Tab: Custom Widgets", "Custom Widgets" ) + "###CustomWidgetsSettingsTab" ) )
+				if( ImGui.BeginTabItem( Loc.Localize( "Settings Tab: Custom Widgets", "自訂小工具" ) + "###CustomWidgetsSettingsTab" ) )
 				{
 					CustomWidgetsUI.DrawSettingsTab();
 					ImGui.EndTabItem();
 				}
-				if( ImGui.BeginTabItem( Loc.Localize( "Settings Tab: Custom Arcs", "Custom Arcs" ) + "###CustomArcsSettingsTab" ) )
+				if( ImGui.BeginTabItem( Loc.Localize( "Settings Tab: Custom Arcs", "自訂距離弧線" ) + "###CustomArcsSettingsTab" ) )
 				{
 					CustomArcsUI.DrawSettingsTab();
 					ImGui.EndTabItem();
@@ -104,17 +104,17 @@ public sealed class PluginUI : IDisposable
 				ImGui.EndTabBar();
 			}
 
-			if( ImGui.Button( Loc.Localize( "Button: Save", "Save" ) + "###Save Button" ) )
+			if( ImGui.Button( Loc.Localize( "Button: Save", "儲存" ) + "###Save Button" ) )
 			{
 				mConfiguration.Save();
 			}
 			ImGui.SameLine();
-			if( ImGui.Button( Loc.Localize( "Button: Save and Close", "Save and Close" ) + "###Save and Close Button" ) )
+			if( ImGui.Button( Loc.Localize( "Button: Save and Close", "儲存並關閉" ) + "###Save and Close Button" ) )
 			{
 				mConfiguration.Save();
 				SettingsWindowVisible = false;
 			}
-			float linkTextWidth = ImGui.CalcTextSize( Loc.Localize( "Config Text: Distance Information Link", "About Distance Measurement in FFXIV" ) ).X;
+			float linkTextWidth = ImGui.CalcTextSize( Loc.Localize( "Config Text: Distance Information Link", "關於 FFXIV 的距離計算" ) ).X;
 			ImGui.PushFont( UiBuilder.IconFont );
 			linkTextWidth += ImGui.CalcTextSize( "\uF0C1" ).X;
 			ImGui.PopFont();
@@ -128,7 +128,7 @@ public sealed class PluginUI : IDisposable
 				ImGui.PopFont();
 				ImGui.PopStyleColor();
 				ImGui.SameLine();
-				ImGuiUtils.URLLink( "https://github.com/PunishedPineapple/Distance/wiki/Distances-in-FFXIV", Loc.Localize( "Config Text: Distance Information Link", "About Distance Measurement in FFXIV" ), false, UiBuilder.IconFont );
+				ImGuiUtils.URLLink( "https://github.com/PunishedPineapple/Distance/wiki/Distances-in-FFXIV", Loc.Localize( "Config Text: Distance Information Link", "關於 FFXIV 的距離計算" ), false, UiBuilder.IconFont );
 			}
 			catch( Exception e )
 			{

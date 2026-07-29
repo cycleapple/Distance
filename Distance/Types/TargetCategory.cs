@@ -16,10 +16,10 @@ public static class TargetCategoryExtensions
 	{
 		return targetCategory switch
 		{
-			TargetCategory.Targets => Loc.Localize( "Terminology: Target Category - Targets", "Targets" ),
-			TargetCategory.Self => Loc.Localize( "Terminology: Target Category - Self", "Yourself" ),
-			TargetCategory.AllEnemies => Loc.Localize( "Terminology: Target Category - All Enemies", "All Enemies" ),
-			TargetCategory.AllPlayers => Loc.Localize( "Terminology: Target Category - All Players", "All Players" ),
+			TargetCategory.Targets => Loc.Localize( "Terminology: Target Category - Targets", "目標" ),
+			TargetCategory.Self => Loc.Localize( "Terminology: Target Category - Self", "自己" ),
+			TargetCategory.AllEnemies => Loc.Localize( "Terminology: Target Category - All Enemies", "所有敵人" ),
+			TargetCategory.AllPlayers => Loc.Localize( "Terminology: Target Category - All Players", "所有玩家" ),
 			_ => "You should never see this!",
 		};
 	}

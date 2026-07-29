@@ -17,11 +17,11 @@ internal static class AddonAttachTypeExtensions
 	{
 		return attachType switch
 		{
-			AddonAttachType.Auto => Loc.Localize( "Terminology: UI Attach Point - Auto", "Automatic" ),
-			AddonAttachType.ScreenText => Loc.Localize( "Terminology: UI Attach Point - Screen Text", "Screen Space" ),
-			AddonAttachType.Target => Loc.Localize( "Terminology: UI Attach Point - Target", "Target Bar" ),
-			AddonAttachType.FocusTarget => Loc.Localize( "Terminology: UI Attach Point - Focus Target", "Focus Target Bar" ),
-			AddonAttachType.Cursor => Loc.Localize( "Terminology: UI Attach Point - Mouse Cursor", "Mouse Cursor" ),
+			AddonAttachType.Auto => Loc.Localize( "Terminology: UI Attach Point - Auto", "自動" ),
+			AddonAttachType.ScreenText => Loc.Localize( "Terminology: UI Attach Point - Screen Text", "螢幕空間" ),
+			AddonAttachType.Target => Loc.Localize( "Terminology: UI Attach Point - Target", "目標資訊" ),
+			AddonAttachType.FocusTarget => Loc.Localize( "Terminology: UI Attach Point - Focus Target", "焦點目標資訊" ),
+			AddonAttachType.Cursor => Loc.Localize( "Terminology: UI Attach Point - Mouse Cursor", "滑鼠游標" ),
 			_ => "You should never see this!",
 		};
 	}

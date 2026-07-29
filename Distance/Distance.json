@@ -1,8 +1,8 @@
 {
   "Author": "PunishedPineapple",
   "Name": "Distance",
-  "Punchline": "Target distance widgets.",
-  "Description": "Displays the distance in yalms (or meters, depending on client language) to your target and/or other enemies, players, NPCs, etc.  It can also display the aggro range for supported bosses.\r\nPlease note that this plugin automatically downloads updates for aggro data by default.  This can be disabled in the plugin settings if you wish.",
+  "Punchline": "顯示目標距離的小工具。",
+  "Description": "顯示你與目標、其他敵人、玩家或 NPC 等物件之間的距離；也能顯示支援首領的敵意偵測範圍。\r\n本插件預設會自動下載敵意距離資料更新，可在插件設定中停用。",
   "RepoUrl": "https://github.com/PunishedPineapple/Distance",
   "IconUrl": "https://github.com/PunishedPineapple/Distance/raw/main/docs/Images/icon.png",
   "ImageUrls": [
