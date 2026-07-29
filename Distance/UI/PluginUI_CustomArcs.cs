@@ -134,12 +134,12 @@ internal sealed class PluginUI_CustomArcs : IDisposable
 			ImGui.SameLine();
 			string nameHint = config.ApplicableTargetCategory == TargetCategory.Targets ? config.ApplicableTargetType.GetTranslatedName() : config.ApplicableTargetCategory.GetTranslatedName();
 			ImGui.InputTextWithHint( "###ArcNameInputBox", nameHint, ref config.ArcName, 50 );
-			ImGuiUtils.HelpMarker( Loc.Localize( "Help: Arc Name", "This is used to give a customized name to this Arc for use with certain text commands.  If you leave it blank, the type of target for this Arc will be used in the header above, but it will not have a name for use in text commands." ) );
+			ImGuiUtils.HelpMarker( Loc.Localize( "Help: Arc Name", "為弧線設定自訂名稱，以供部分文字指令使用。留空時標題會顯示目標類型，但無法透過名稱供文字指令使用。" ) );
 			ImGui.Checkbox( Loc.Localize( "Config Option: Arc Enabled", "啟用" ) + "###Arc Enabled Checkbox", ref config.Enabled );
 			if( ImGui.TreeNode( Loc.Localize( "Config Section Header: Distance Arc Rules", "距離規則" ) + "###DistanceArcRulesHeader" ) )
 			{
 				ImGui.Text( Loc.Localize( "Config Option: Object Type", "物件類型：" ) );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Applicable Object Type", "The basic category of object(s) for which this Arc will show distance." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Applicable Object Type", "選擇此弧線要顯示距離的物件基本分類。" ) );
 				if( ImGui.BeginCombo( "###ArcObjectCategoryDropdown", config.ApplicableTargetCategory.GetTranslatedName() ) )
 				{
 					foreach( var item in Enum.GetValues<TargetCategory>() )
@@ -155,7 +155,7 @@ internal sealed class PluginUI_CustomArcs : IDisposable
 				if( config.ApplicableTargetCategory == TargetCategory.Targets )
 				{
 					ImGui.Text( Loc.Localize( "Config Option: Target Type", "目標類型：" ) );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Arc Applicable Target Type", "The type of target for which this Arc will show distance.  \"Soft Target\" generally only matters for controller players and some two-handed keyboard players.  \"Field Mouseover\" is for when you mouseover an object in the world.  \"UI Mouseover\" is for when you mouseover the party list." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Arc Applicable Target Type", "弧線要顯示距離的目標類型。「軟目標」主要供控制器或部分雙手鍵盤操作使用；「場景滑鼠指向目標」是場景中的物件，「介面滑鼠指向目標」則是小隊列表等介面目標。" ) );
 					if( ImGui.BeginCombo( "###ArcTargetTypeDropdown", config.ApplicableTargetType.GetTranslatedName() ) )
 					{
 						foreach( var item in PluginUI.TargetDropdownMenuItems )
@@ -171,7 +171,7 @@ internal sealed class PluginUI_CustomArcs : IDisposable
 				else if( config.ApplicableTargetCategory == TargetCategory.Self )
 				{
 					ImGui.Text( Loc.Localize( "Config Option: Arc Self Azimuth", "弧線中心方位角：" ) );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Arc Self Azimuth", "Direction relative to your character to display the arc.  0 is in front, 90 is to the right, 180 is behind, 270 is to the left." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Arc Self Azimuth", "弧線相對角色的顯示方向：0 為前方、90 為右方、180 為後方、270 為左方。" ) );
 					ImGui.DragInt( "###ArcSelfAzimuthSlider", ref config.SelfTargetedArcAzimuth_Deg, 1f, 0, 359, "%d", ImGuiSliderFlags.AlwaysClamp );
 					ImGui.Checkbox( Loc.Localize( "Config Option: Camera-relative Self Arc", "Camera Relative" ) + "###ArcSelfCameraRelativeCheckbox", ref config.SelfTargetedArcCameraRelative );
 				}
@@ -190,9 +190,9 @@ internal sealed class PluginUI_CustomArcs : IDisposable
 				}
 
 				ImGui.Checkbox( Loc.Localize( "Config Option: Distance is to Ring", "使用到目標環的距離，而非目標中心。" ) + "###ArcDistanceIsToRingCheckbox", ref config.DistanceIsToRing );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance is to Ring", "You will generally want this box checked unless the arc is centered on yourself, but specific use cases will vary." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance is to Ring", "除非弧線以自己為中心，通常建議勾選；實際仍依用途調整。" ) );
 				ImGui.Text( String.Format( Loc.Localize( "Config Option: Arc Radius", "弧線半徑（{0}）：" ), LocalizationHelpers.DistanceUnitShort ) );
-				ImGuiUtils.HelpMarker( String.Format( Loc.Localize( "Help: Arc Radius", "This distance is relative to either the object's center, or to its hitring, as configured above.  Max melee is effectively 3.5{0}." ), LocalizationHelpers.DistanceUnitShort ) );
+				ImGuiUtils.HelpMarker( String.Format( Loc.Localize( "Help: Arc Radius", "此距離依上方設定，以物件中心或目標環為基準。近戰最大有效距離約為 3.5{0}。" ), LocalizationHelpers.DistanceUnitShort ) );
 				ImGui.DragFloat( "###ArcDistanceSlider", ref config.ArcRadius_Yalms, 0.1f, -30f, 30f );
 				ImGui.TreePop();
 			}
@@ -233,7 +233,7 @@ internal sealed class PluginUI_CustomArcs : IDisposable
 				if( config.ApplicableTargetCategory != TargetCategory.Self )
 				{
 					ImGui.Checkbox( Loc.Localize( "Config Option: Distance Arc Use Distance-based Colors", "依距離使用不同弧線顏色。" ) + "###DistanceArcUseDistanceBasedColors", ref config.UseDistanceBasedColor );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Arc Use Distance-based Colors", "Allows you to set different colors for different distance thresholds.  Uses the \"Far\" colors if past that distance, otherwise the \"Near\" colors if past that distance, otherwise uses the base color specified below." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Arc Use Distance-based Colors", "可依距離臨界值設定不同顏色：超過「遠」距離使用遠色，否則超過「近」距離時使用近色，其餘使用下方基本顏色。" ) );
 				}
 				ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Arc Color", "弧線顏色" ) + "###ArcColorPicker", ref config.Color, ImGuiColorEditFlags.NoInputs );
 				ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Arc Glow Color", "弧線發光顏色" ) + "###ArcEdgeColorPicker", ref config.EdgeColor, ImGuiColorEditFlags.NoInputs );
@@ -272,7 +272,7 @@ internal sealed class PluginUI_CustomArcs : IDisposable
 				ImGui.Text( String.Format( Loc.Localize( "Config Option: Distance Arc Outside Fade Interval", "淡出區間（{0}）：" ), LocalizationHelpers.DistanceUnitShort ) );
 				ImGui.DragFloat( "###ArcDistanceOuterFadeIntervalSlider", ref config.FadeoutIntervalOuter_Yalms, 0.5f, 0f, 30f, "%g", ImGuiSliderFlags.AlwaysClamp );
 				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Arc Invert Fading", "反轉淡出範圍。" ) + "###InvertedFadingCheckbox", ref config.InvertFading );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Arc Invert Fading", "Instead of showing the arc within the range defined above, show it only outside of the defined range instead.  The fadeout interval is added to the configured threshold distance when this option is used." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Arc Invert Fading", "改為只在上述範圍外顯示弧線；啟用時淡出區間會加到所設定的臨界距離。" ) );
 
 				ImGui.TreePop();
 			}

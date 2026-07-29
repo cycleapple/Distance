@@ -29,7 +29,7 @@ internal sealed class PluginUI_Nameplates : IDisposable
 			{
 				ImGui.Checkbox( Loc.Localize("Config Option: Distance is to Ring for nameplates", "顯示到目標環的距離，而非目標中心。" ) + $"###Distance is to ring (nameplates).", ref mConfiguration.NameplateDistancesConfig.DistanceIsToRing );
 				ImGui.Checkbox( Loc.Localize( "Config Option: Nameplates - Show All", "在所有名牌上顯示距離。" ) + $"###Show distance to all nameplates.", ref mConfiguration.NameplateDistancesConfig.ShowAll );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show All", "Shows distance on all nameplates for any objects that match the object type filters in the next section.  If this is unchecked, additional options will appear below." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show All", "在符合下一節物件類型篩選的所有名牌上顯示距離。取消勾選後，下方會出現其他條件。" ) );
 				if( !mConfiguration.NameplateDistancesConfig.ShowAll )
 				{
 					ImGui.Indent();
@@ -38,13 +38,13 @@ internal sealed class PluginUI_Nameplates : IDisposable
 					ImGui.Checkbox( Loc.Localize( "Config Option: Show Distance on Focus Target", "顯示焦點目標的距離。" ) + $"###Show distance to Focus Target (nameplates).", ref mConfiguration.NameplateDistancesConfig.ShowFocusTarget );
 					ImGui.Checkbox( Loc.Localize( "Config Option: Show Distance on Mouseover Target", "顯示滑鼠指向目標的距離。" ) + $"###Show distance to mouseover target (nameplates).", ref mConfiguration.NameplateDistancesConfig.ShowMouseoverTarget );
 					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplates - Show Distance on Aggro", "顯示已對你產生敵意之敵人的距離。" ) + $"###Show distance to aggro (nameplates).", ref mConfiguration.NameplateDistancesConfig.ShowAggressive );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show Distance on Aggro", "This only applies to targets shown in the enemy list.  Distances for additional enemies aggressive to you will not be shown." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show Distance on Aggro", "僅套用於敵對列表中的目標；不會顯示其他已對你產生敵意之敵人的距離。" ) );
 					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplates - Show Distance on Party", "顯示小隊成員的距離。" ) + $"###Show distance to party (nameplates).", ref mConfiguration.NameplateDistancesConfig.ShowPartyMembers );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show Distance on Party", "This does not apply to cross-world party members until you have entered an instanced duty." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show Distance on Party", "進入副本任務前，不會套用於跨界小隊成員。" ) );
 					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplates - Show Distance on Alliance", "顯示團隊成員的距離。" ) + $"###Show distance to alliance (nameplates).", ref mConfiguration.NameplateDistancesConfig.ShowAllianceMembers );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show Distance on Alliance", "This does not apply to cross-world alliance members until you have entered an instanced duty." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Show Distance on Alliance", "進入副本任務前，不會套用於跨界團隊成員。" ) );
 					ImGui.Checkbox( Loc.Localize( "Config Option: Filters are Exclusive", "所有篩選條件必須同時符合。" ) + $"###Filters are exclusive (nameplates).", ref mConfiguration.NameplateDistancesConfig.FiltersAreExclusive );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Filters are Exclusive", "If this is checked, distances will be shown only when an object meets both the criteria above AND the filters below.  If it is unchecked, distances will be shown for objects that meet EITHER criteria." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Filters are Exclusive", "勾選時，物件必須同時符合上方條件與下方篩選才顯示距離；未勾選時，符合任一組條件即可。" ) );
 					ImGui.Unindent();
 				}
 				ImGui.TreePop();
@@ -88,7 +88,7 @@ internal sealed class PluginUI_Nameplates : IDisposable
 				ImGui.Text( Loc.Localize( "Config Option: Nameplates - Text Offset", "距離文字位置偏移（X、Y）：" ) );
 				ImGui.DragFloat2( "###NameplateDistanceTextOffsetSlider", ref mConfiguration.NameplateDistancesConfig.DistanceTextOffset, 1f, sliderLimits.X, sliderLimits.Y, "%g", ImGuiSliderFlags.AlwaysClamp );
 				ImGui.Checkbox( Loc.Localize( "Config Option: Nameplates - Automatic Alignment", "自動排列距離文字位置。" ) + $"###automatic alignment (nameplates).", ref mConfiguration.NameplateDistancesConfig.AutomaticallyAlignText );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Automatic Alignment", "If this is checked, the distance text will automatically right, center, or left align to the nameplate text (subject to the offset above).  If unchecked, the distance text will always be at a fixed location, regardless of name length." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplates - Automatic Alignment", "勾選時，距離文字會依名牌文字自動靠右、置中或靠左，並套用上方偏移；未勾選時則固定位置，不受名稱長度影響。" ) );
 				if( mConfiguration.NameplateDistancesConfig.AutomaticallyAlignText )
 				{
 					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplates - Place Below Name", "將距離放在名牌下方。" ) + $"###align below name (nameplates).", ref mConfiguration.NameplateDistancesConfig.PlaceTextBelowName );
@@ -112,24 +112,24 @@ internal sealed class PluginUI_Nameplates : IDisposable
 			}
 			if( ImGui.TreeNode( Loc.Localize( "Config Section Header: Nameplate Colors", "顏色" ) + $"###Nameplate Colors Header." ) )
 			{
-				ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Distance-based Colors (Party)", "Use distance-based text colors for party members." ) + $"###Distance Text Use distance-based colors (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.UseDistanceBasedColor_Party );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplate Distance Text Use Distance-based Colors", "Allows you to set different colors for different distance thresholds.  Uses the \"Far\" color if beyond that distance, the \"Mid\" color if between far and near thresholds, and the \"Near\" color if within that distance." ) );
+				ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Distance-based Colors (Party)", "小隊成員依距離使用不同文字顏色。" ) + $"###Distance Text Use distance-based colors (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.UseDistanceBasedColor_Party );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplate Distance Text Use Distance-based Colors", "可依距離臨界值設定不同顏色：超過遠距離使用「遠」色，介於遠與近之間使用「中」色，近距離內使用「近」色。" ) );
 				if( mConfiguration.NameplateDistancesConfig.UseDistanceBasedColor_Party )
 				{
 					ImGui.Indent();
-					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Near", "Use default nameplate color when near." ) + $"###Distance Text Use nameplate color (near) (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.NearRangeTextUseNameplateColor_Party );
+					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Near", "近距離使用預設名牌顏色。" ) + $"###Distance Text Use nameplate color (near) (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.NearRangeTextUseNameplateColor_Party );
 					if( !mConfiguration.NameplateDistancesConfig.NearRangeTextUseNameplateColor_Party )
 					{
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Color Near", "Distance text color (near)" ) + $"###DistanceTextColorPicker Near (Nameplates - Party)", ref mConfiguration.NameplateDistancesConfig.NearRangeTextColor_Party, ImGuiColorEditFlags.NoInputs );
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Glow Color Near", "Distance text glow color (near)" ) + $"###DistanceTextEdgeColorPicker Near (Nameplates - Party)", ref mConfiguration.NameplateDistancesConfig.NearRangeTextEdgeColor_Party, ImGuiColorEditFlags.NoInputs );
 					}
-					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Mid", "Use default nameplate color when mid." ) + $"###Distance Text Use nameplate color (mid) (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.MidRangeTextUseNameplateColor_Party );
+					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Mid", "中距離使用預設名牌顏色。" ) + $"###Distance Text Use nameplate color (mid) (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.MidRangeTextUseNameplateColor_Party );
 					if( !mConfiguration.NameplateDistancesConfig.MidRangeTextUseNameplateColor_Party )
 					{
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Color Mid", "Distance text color (mid)" ) + $"###DistanceTextColorPicker Mid (Nameplates - Party)", ref mConfiguration.NameplateDistancesConfig.MidRangeTextColor_Party, ImGuiColorEditFlags.NoInputs );
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Glow Color Mid", "Distance text glow color (mid)" ) + $"###DistanceTextEdgeColorPicker Mid (Nameplates - Party)", ref mConfiguration.NameplateDistancesConfig.MidRangeTextEdgeColor_Party, ImGuiColorEditFlags.NoInputs );
 					}
-					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Far", "Use default nameplate color when far." ) + $"###Distance Text Use nameplate color (far) (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.FarRangeTextUseNameplateColor_Party );
+					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Far", "遠距離使用預設名牌顏色。" ) + $"###Distance Text Use nameplate color (far) (Nameplates - Party).", ref mConfiguration.NameplateDistancesConfig.FarRangeTextUseNameplateColor_Party );
 					if( !mConfiguration.NameplateDistancesConfig.FarRangeTextUseNameplateColor_Party )
 					{
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Color Far", "Distancet text color (far)" ) + $"###DistanceTextColorPicker Far (Nameplates - Party)", ref mConfiguration.NameplateDistancesConfig.FarRangeTextColor_Party, ImGuiColorEditFlags.NoInputs );
@@ -143,24 +143,24 @@ internal sealed class PluginUI_Nameplates : IDisposable
 					ImGui.Spacing();
 				}
 
-				ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Distance-based Colors (BNpc)", "Use distance-based text colors for battle NPCs." ) + $"###Distance Text Use distance-based colors (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.UseDistanceBasedColor_BNpc );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplate Distance Text Use Distance-based Colors", "Allows you to set different colors for different distance thresholds.  Uses the \"Far\" color if beyond that distance, the \"Mid\" color if between far and near thresholds, and the \"Near\" color if within that distance." ) );
+				ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Distance-based Colors (BNpc)", "戰鬥 NPC 依距離使用不同文字顏色。" ) + $"###Distance Text Use distance-based colors (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.UseDistanceBasedColor_BNpc );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Nameplate Distance Text Use Distance-based Colors", "可依距離臨界值設定不同顏色：超過遠距離使用「遠」色，介於遠與近之間使用「中」色，近距離內使用「近」色。" ) );
 				if( mConfiguration.NameplateDistancesConfig.UseDistanceBasedColor_BNpc )
 				{
 					ImGui.Indent();
-					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Near", "Use default nameplate color when near." ) + $"###Distance Text Use nameplate color (near) (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.NearRangeTextUseNameplateColor_BNpc );
+					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Near", "近距離使用預設名牌顏色。" ) + $"###Distance Text Use nameplate color (near) (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.NearRangeTextUseNameplateColor_BNpc );
 					if( !mConfiguration.NameplateDistancesConfig.NearRangeTextUseNameplateColor_BNpc )
 					{
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Color Near", "Distance text color (near)" ) + $"###DistanceTextColorPicker Near (Nameplates - BNpc)", ref mConfiguration.NameplateDistancesConfig.NearRangeTextColor_BNpc, ImGuiColorEditFlags.NoInputs );
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Glow Color Near", "Distance text glow color (near)" ) + $"###DistanceTextEdgeColorPicker Near (Nameplates - BNpc)", ref mConfiguration.NameplateDistancesConfig.NearRangeTextEdgeColor_BNpc, ImGuiColorEditFlags.NoInputs );
 					}
-					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Mid", "Use default nameplate color when mid." ) + $"###Distance Text Use nameplate color (mid) (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.MidRangeTextUseNameplateColor_BNpc );
+					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Mid", "中距離使用預設名牌顏色。" ) + $"###Distance Text Use nameplate color (mid) (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.MidRangeTextUseNameplateColor_BNpc );
 					if( !mConfiguration.NameplateDistancesConfig.MidRangeTextUseNameplateColor_BNpc )
 					{
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Color Mid", "Distance text color (mid)" ) + $"###DistanceTextColorPicker Mid (Nameplates - BNpc)", ref mConfiguration.NameplateDistancesConfig.MidRangeTextColor_BNpc, ImGuiColorEditFlags.NoInputs );
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Glow Color Mid", "Distance text glow color (mid)" ) + $"###DistanceTextEdgeColorPicker Mid (Nameplates - BNpc)", ref mConfiguration.NameplateDistancesConfig.MidRangeTextEdgeColor_BNpc, ImGuiColorEditFlags.NoInputs );
 					}
-					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Far", "Use default nameplate color when far." ) + $"###Distance Text Use nameplate color (far) (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.FarRangeTextUseNameplateColor_BNpc );
+					ImGui.Checkbox( Loc.Localize( "Config Option: Nameplate Distance Text Use Nameplate Color Far", "遠距離使用預設名牌顏色。" ) + $"###Distance Text Use nameplate color (far) (Nameplates - BNpc).", ref mConfiguration.NameplateDistancesConfig.FarRangeTextUseNameplateColor_BNpc );
 					if( !mConfiguration.NameplateDistancesConfig.FarRangeTextUseNameplateColor_BNpc )
 					{
 						ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Color Far", "Distancet text color (far)" ) + $"###DistanceTextColorPicker Far (Nameplates - BNpc)", ref mConfiguration.NameplateDistancesConfig.FarRangeTextColor_BNpc, ImGuiColorEditFlags.NoInputs );
@@ -177,7 +177,7 @@ internal sealed class PluginUI_Nameplates : IDisposable
 
 			if( ImGui.TreeNode( Loc.Localize( "Config Section Header: Nameplate Fading", "淡出" ) + "###NameplateFadingHeader" ) )
 			{
-				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Enable Fading (BNpc)", "Enable Distance-based fading for battle NPCs." ), ref mConfiguration.NameplateDistancesConfig.EnableFading_BNpc );
+				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Enable Fading (BNpc)", "戰鬥 NPC 啟用依距離淡出。" ), ref mConfiguration.NameplateDistancesConfig.EnableFading_BNpc );
 				if( mConfiguration.NameplateDistancesConfig.EnableFading_BNpc )
 				{
 					ImGui.Indent();
@@ -195,7 +195,7 @@ internal sealed class PluginUI_Nameplates : IDisposable
 					ImGui.Unindent();
 				}
 
-				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Enable Fading (Party)", "Enable Distance-based fading for party members." ), ref mConfiguration.NameplateDistancesConfig.EnableFading_Party );
+				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Enable Fading (Party)", "小隊成員啟用依距離淡出。" ), ref mConfiguration.NameplateDistancesConfig.EnableFading_Party );
 				if( mConfiguration.NameplateDistancesConfig.EnableFading_Party )
 				{
 					ImGui.Indent();
@@ -213,7 +213,7 @@ internal sealed class PluginUI_Nameplates : IDisposable
 					ImGui.Unindent();
 				}
 
-				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Enable Fading (Other)", "Enable Distance-based fading for other entities." ), ref mConfiguration.NameplateDistancesConfig.EnableFading_Other );
+				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Enable Fading (Other)", "其他目標啟用依距離淡出。" ), ref mConfiguration.NameplateDistancesConfig.EnableFading_Other );
 				if( mConfiguration.NameplateDistancesConfig.EnableFading_Other )
 				{
 					ImGui.Indent();

@@ -114,12 +114,12 @@ internal sealed class PluginUI_GeneralSettings : IDisposable
 
 				if( ImGui.TreeNode( Loc.Localize( "Config Section Header: Aggro Widget Colors", "顏色" ) + $"###Aggro Widget Colors Header." ) )
 				{
-					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Color", "Aggro widget text color" ) + "###AggroDistanceTextColorPicker", ref mConfiguration.AggroDistanceTextColor, ImGuiColorEditFlags.NoInputs );
-					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Glow Color", "Aggro widget text glow color" ) + "###AggroDistanceTextEdgeColorPicker", ref mConfiguration.AggroDistanceTextEdgeColor, ImGuiColorEditFlags.NoInputs );
-					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Color Caution", "Aggro widget text color (caution range)" ) + "###AggroDistanceCautionTextColorPicker", ref mConfiguration.AggroDistanceCautionTextColor, ImGuiColorEditFlags.NoInputs );
-					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Glow Color Caution", "Aggro widget text glow color (caution range)" ) + "###AggroDistanceCautionTextEdgeColorPicker", ref mConfiguration.AggroDistanceCautionTextEdgeColor, ImGuiColorEditFlags.NoInputs );
-					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Color Warning", "Aggro widget text color (warning range)" ) + "###AggroDistanceWarningTextColorPicker", ref mConfiguration.AggroDistanceWarningTextColor, ImGuiColorEditFlags.NoInputs );
-					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Glow Color Warning", "Aggro widget text glow color (warning range)" ) + "###AggroDistanceWarningTextEdgeColorPicker", ref mConfiguration.AggroDistanceWarningTextEdgeColor, ImGuiColorEditFlags.NoInputs );
+					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Color", "敵意距離文字顏色" ) + "###AggroDistanceTextColorPicker", ref mConfiguration.AggroDistanceTextColor, ImGuiColorEditFlags.NoInputs );
+					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Glow Color", "敵意距離文字發光顏色" ) + "###AggroDistanceTextEdgeColorPicker", ref mConfiguration.AggroDistanceTextEdgeColor, ImGuiColorEditFlags.NoInputs );
+					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Color Caution", "敵意距離文字顏色（注意範圍）" ) + "###AggroDistanceCautionTextColorPicker", ref mConfiguration.AggroDistanceCautionTextColor, ImGuiColorEditFlags.NoInputs );
+					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Glow Color Caution", "敵意距離文字發光顏色（注意範圍）" ) + "###AggroDistanceCautionTextEdgeColorPicker", ref mConfiguration.AggroDistanceCautionTextEdgeColor, ImGuiColorEditFlags.NoInputs );
+					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Color Warning", "敵意距離文字顏色（警告範圍）" ) + "###AggroDistanceWarningTextColorPicker", ref mConfiguration.AggroDistanceWarningTextColor, ImGuiColorEditFlags.NoInputs );
+					ImGui.ColorEdit4( Loc.Localize( "Config Option: Aggro Distance Text Glow Color Warning", "敵意距離文字發光顏色（警告範圍）" ) + "###AggroDistanceWarningTextEdgeColorPicker", ref mConfiguration.AggroDistanceWarningTextEdgeColor, ImGuiColorEditFlags.NoInputs );
 					ImGui.Text( String.Format( Loc.Localize( "Config Option: Aggro Distance Caution Range", "Aggro distance \"caution\" range ({0}):" ), LocalizationHelpers.DistanceUnitShort ) );
 					ImGui.SliderFloat( "###AggroDistanceCautionRangeSlider", ref mConfiguration.AggroCautionDistance_Yalms, 0, 30 );
 					ImGui.Text( String.Format( Loc.Localize( "Config Option: Aggro Distance Warning Range", "Aggro distance \"warning\" range ({0}):" ), LocalizationHelpers.DistanceUnitShort ) );

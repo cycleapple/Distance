@@ -128,12 +128,12 @@ internal sealed class PluginUI_CustomWidgets : IDisposable
 		ImGui.Text( Loc.Localize( "Config Option: Widget Name", "小工具名稱：" ) );
 			ImGui.SameLine();
 			ImGui.InputTextWithHint( "###WidgetNameInputBox", config.ApplicableTargetType.GetTranslatedName(), ref config.WidgetName, 50 );
-			ImGuiUtils.HelpMarker( Loc.Localize( "Help: Widget Name", "This is used to give a customized name to this widget for use with certain text commands.  If you leave it blank, the type of target for this widget will be used in the header above, but it will not have a name for use in text commands." ) );
+			ImGuiUtils.HelpMarker( Loc.Localize( "Help: Widget Name", "為小工具設定自訂名稱，以供部分文字指令使用。留空時標題會顯示目標類型，但無法透過名稱供文字指令使用。" ) );
 		ImGui.Checkbox( Loc.Localize( "Config Option: Widget Enabled", "啟用" ) + "###WidgetEnabledCheckbox", ref config.Enabled );
 		if( ImGui.TreeNode( Loc.Localize( "Config Section Header: Distance Widget Rules", "距離規則" ) + "###DistanceWidgetRulesHeader" ) )
 			{
 			ImGui.Text( Loc.Localize( "Config Option: Target Type", "目標類型：" ) );
-				ImGuiUtils.HelpMarker( Loc.Localize("Help: Widget Applicable Target Type", "The type of target for which this widget will show distance.  \"Soft Target\" generally only matters for controller players and some two-handed keyboard players.  \"Field Mouseover\" is for when you mouseover an object in the world.  \"UI Mouseover\" is for when you mouseover the party list." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize("Help: Widget Applicable Target Type", "小工具要顯示距離的目標類型。「軟目標」主要供控制器或部分雙手鍵盤操作使用；「場景滑鼠指向目標」是場景中的物件，「介面滑鼠指向目標」則是小隊列表等介面目標。" ) );
 				if( ImGui.BeginCombo( "###DistanceTypeDropdown", config.ApplicableTargetType.GetTranslatedName() ) )
 				{
 					foreach( var item in PluginUI.TargetDropdownMenuItems )
@@ -147,7 +147,7 @@ internal sealed class PluginUI_CustomWidgets : IDisposable
 				}
 				ImGui.Checkbox( Loc.Localize("Config Option: Widget Distance is to Ring", "顯示到目標環的距離，而非目標中心。" ) + "###DistanceIsToRing", ref config.DistanceIsToRing );
 				ImGui.Text( String.Format( Loc.Localize( "Config Option: Distance Measurement Offset", "距離讀數偏移量（{0}）：" ), LocalizationHelpers.DistanceUnitShort ) );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Readout Offset", "This value is subtracted from the real distance to determine the displayed distance.  This can be used to get the widget to show the distance from being able to hit the boss with a skill, for example." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Readout Offset", "顯示距離會從實際距離減去此數值，例如可用來顯示距離首領進入技能有效範圍還差多少。" ) );
 				ImGui.DragFloat( "###DistanceOffsetSlider", ref config.DistanceOffset_Yalms, 0.1f, -30f, 30f );
 				ImGui.TreePop();
 			}
@@ -173,12 +173,12 @@ internal sealed class PluginUI_CustomWidgets : IDisposable
 			if( ImGui.TreeNode( Loc.Localize( "Config Section Header: Distance Widget Appearance", "外觀" ) + "###DistanceWidgetAppearanceHeader" ) )
 			{
 				ImGui.Text( Loc.Localize( "Config Option: UI Attach Point", "介面附著位置：" ) );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: UI Attach Point", "This is the UI element to which you wish to attach this widget.  \"Automatic\" tries to infer the best choice based on the target type you've selected for this widget.  \"Screen Space\" does not attach to a specific UI element, but floats above everything.  The others should be self-explanatory.  Note: Attaching to the mouse cursor can look odd if you use the hardware cursor; switch to the software cursor in the game options if necessary." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: UI Attach Point", "選擇小工具要附著的介面元素。「自動」會依目標類型選擇合適位置；「螢幕空間」不附著特定介面，會浮在所有內容上方。若附著滑鼠游標時顯示異常，可在遊戲設定改用軟體游標。" ) );
 				ImGui.Combo( "###UIAttachTypeDropdown", ref config.mUIAttachType, PluginUI.UIAttachDropdownOptions, PluginUI.UIAttachDropdownOptions.Length );
 				bool useScreenText = config.UIAttachType.GetGameAddonToUse( config.ApplicableTargetType ) == GameAddonEnum.ScreenText;
 				Vector2 sliderLimits = new( useScreenText ? 0 : -1000, useScreenText ? Math.Max( ImGuiHelpers.MainViewport.Size.X, ImGuiHelpers.MainViewport.Size.Y ) : 1000 );
 				ImGui.Text( Loc.Localize( "Config Option: Distance Text Position", "距離讀數位置（X、Y）：" ) );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Position", "This is an offset relative to the UI element if it is attached to one, or is an absolute position on the screen if not." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Position", "附著介面元素時此數值為相對偏移；未附著時則為螢幕絕對位置。" ) );
 				ImGui.DragFloat2( "###DistanceTextPositionSlider", ref config.TextPosition, 1f, sliderLimits.X, sliderLimits.Y, "%g", ImGuiSliderFlags.AlwaysClamp );
 				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Use Heavy Font", "距離文字使用粗體字型。" ) + "###DistanceFontHeavy", ref config.FontHeavy );
 				ImGui.Text( Loc.Localize( "Config Option: Distance Text Font Size", "距離文字字型大小：" ) );
@@ -196,9 +196,9 @@ internal sealed class PluginUI_CustomWidgets : IDisposable
 			if( ImGui.TreeNode( Loc.Localize( "Config Section Header: Distance Widget Colors", "顏色" ) + "###DistanceWidgetColorsHeader" ) )
 			{
 				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Track Target Bar Color", "嘗試使用目標資訊的文字顏色。" ) + "###DistanceTextUseTargetBarColor", ref config.TrackTargetBarTextColor );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Track Target Bar Color", "If the color of the target bar text (or focus target) can be determined, it will take precedence; otherwise the colors set below will be used." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Track Target Bar Color", "若能判斷目標資訊或焦點目標的文字顏色，會優先使用；否則使用下方設定的顏色。" ) );
 				ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Use Distance-based Colors", "依距離使用不同文字顏色。" ) + "###DistanceTextUseDistanceBasedColors", ref config.UseDistanceBasedColor );
-				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Use Distance-based Colors", "Allows you to set different colors for different distance thresholds.  Uses the \"Far\" color if beyond that distance, otherwise the \"Near\" color if beyond that distance, otherwise uses the base color specified below.  This setting is ignored if the checkbox to track the target bar color is ticked." ) );
+				ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Use Distance-based Colors", "可依距離臨界值設定不同顏色：超過「遠」距離使用遠色，否則超過「近」距離時使用近色，其餘使用基本顏色。若啟用追蹤目標資訊顏色，將忽略此設定。" ) );
 				ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Color", "距離文字顏色" ) + "###DistanceTextColorPicker", ref config.TextColor, ImGuiColorEditFlags.NoInputs );
 				ImGui.ColorEdit4( Loc.Localize( "Config Option: Distance Text Glow Color", "距離文字發光顏色" ) + "###DistanceTextEdgeColorPicker", ref config.TextEdgeColor, ImGuiColorEditFlags.NoInputs );
 				if( config.UseDistanceBasedColor )
@@ -221,7 +221,7 @@ internal sealed class PluginUI_CustomWidgets : IDisposable
 				if( config.EnableFading )
 				{
 					ImGui.Text( String.Format( Loc.Localize( "Config Option: Distance Text Inside Fade Distance", "目標內側開始淡出的距離（{0}）：" ), LocalizationHelpers.DistanceUnitShort ) );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Inside Fade Distance", "If you use the distance from center instead of distance from target ring, the inner fade settings will only ever have an effect if you configured a positive distance offset above." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Inside Fade Distance", "若使用到目標中心的距離而非目標環，只有上方設定正數距離偏移時，內側淡出才會生效。" ) );
 					ImGui.DragFloat( "###DistanceTextInnerFadeThresholdSlider", ref config.FadeoutThresholdInner_Yalms, 0.5f, 1f, 50f, "%g", ImGuiSliderFlags.AlwaysClamp );
 					ImGui.Text( String.Format( Loc.Localize( "Config Option: Distance Text Inside Fade Interval", "淡出區間（{0}）：" ), LocalizationHelpers.DistanceUnitShort ) );
 					ImGui.DragFloat( "###DistanceTextInnerFadeIntervalSlider", ref config.FadeoutIntervalInner_Yalms, 0.5f, 0f, 50f, "%g", ImGuiSliderFlags.AlwaysClamp );
@@ -230,7 +230,7 @@ internal sealed class PluginUI_CustomWidgets : IDisposable
 					ImGui.Text( String.Format( Loc.Localize( "Config Option: Distance Text Outside Fade Interval", "淡出區間（{0}）：" ), LocalizationHelpers.DistanceUnitShort ) );
 					ImGui.DragFloat( "###DistanceTextOuterFadeIntervalSlider", ref config.FadeoutIntervalOuter_Yalms, 0.5f, 0f, 100f, "%g", ImGuiSliderFlags.AlwaysClamp );
 					ImGui.Checkbox( Loc.Localize( "Config Option: Distance Text Invert Fading", "反轉淡出範圍。" ) + "###InvertedFadingCheckbox", ref config.InvertFading );
-					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Invert Fading", "Instead of showing the distance text within the range defined above, show it only outside of the defined range instead.  The fadeout interval is added to the configured threshold distance when this option is used." ) );
+					ImGuiUtils.HelpMarker( Loc.Localize( "Help: Distance Text Invert Fading", "改為只在上述範圍外顯示距離文字；啟用時淡出區間會加到所設定的臨界距離。" ) );
 				}
 
 				ImGui.TreePop();
